@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.memes.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
         getData()
 //        https://meme-api.com/gimme
         binding.button.setOnClickListener{
@@ -32,7 +36,9 @@ class MainActivity : AppCompatActivity() {
        RetrofitInstance.apiInterface.getData().enqueue(object : Callback<responseDataClass?>{
         override fun onResponse(
             call: Call<responseDataClass?>,response: Response<responseDataClass?>
-        ){
+        ){   binding.textview1.text=response.body()?.title
+            binding.textView2.text=response.body()?.author
+            Glide.with(this@MainActivity).load(response.body()?.url).into(binding.imageView2);
              progressDialog.dismiss()
         }
 
