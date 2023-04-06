@@ -3,6 +3,7 @@ package com.example.memes
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.memes.databinding.ActivityMainBinding
